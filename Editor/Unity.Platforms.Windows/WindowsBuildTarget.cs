@@ -6,15 +6,9 @@ namespace Unity.Platforms.Windows
 {
     public abstract class WindowsBuildTarget : BuildTarget
     {
-        public override string GetExecutableExtension()
-        {
-            return ".exe";
-        }
-
-        public override string GetUnityPlatformName()
-        {
-            return nameof(UnityEditor.BuildTarget.StandaloneWindows64);
-        }
+        public override bool CanBuild => UnityEngine.Application.platform == UnityEngine.RuntimePlatform.WindowsEditor;
+        public override string ExecutableExtension => ".exe";
+        public override string UnityPlatformName => nameof(UnityEditor.BuildTarget.StandaloneWindows64);
 
         public override bool Run(FileInfo buildTarget)
         {
@@ -72,27 +66,13 @@ namespace Unity.Platforms.Windows
         protected override bool IsDefaultBuildTarget => true;
 #endif
 
-        public override string GetDisplayName()
-        {
-            return "Windows .NET";
-        }
-
-        public override string GetBeeTargetName()
-        {
-            return "windows-dotnet";
-        }
+        public override string DisplayName => "Windows .NET";
+        public override string BeeTargetName => "windows-dotnet";
     }
 
     class IL2CPPWindowsBuildTarget : WindowsBuildTarget
     {
-        public override string GetDisplayName()
-        {
-            return "Windows IL2CPP";
-        }
-
-        public override string GetBeeTargetName()
-        {
-            return "windows-il2cpp";
-        }
+        public override string DisplayName => "Windows IL2CPP";
+        public override string BeeTargetName => "windows-il2cpp";
     }
 }
