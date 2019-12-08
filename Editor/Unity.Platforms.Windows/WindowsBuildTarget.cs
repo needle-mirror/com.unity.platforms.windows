@@ -22,8 +22,16 @@ namespace Unity.Platforms.Windows
 
             var process = new Process();
             process.StartInfo = startInfo;
-            process.OutputDataReceived += (_, args) => Debug.Log(args.Data);
-            process.ErrorDataReceived += (_, args) => Debug.LogError(args.Data);
+            process.OutputDataReceived += (_, args) =>
+            {
+                if(args.Data != null)
+                    Debug.Log(args.Data);
+            };
+            process.ErrorDataReceived += (_, args) =>
+            {
+                if(args.Data != null)
+                    Debug.LogError(args.Data);
+            };
 
             var success = process.Start();
             if (!success)

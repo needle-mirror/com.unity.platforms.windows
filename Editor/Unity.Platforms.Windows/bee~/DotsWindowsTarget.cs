@@ -3,34 +3,33 @@ using DotsBuildTargets;
 using Unity.BuildSystem.NativeProgramSupport;
 abstract class DotsWindowsTarget : DotsBuildSystemTarget
 {
-    protected override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx64.UserDefaultOrDummy);
+    public override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx64.UserDefaultOrDummy);
 }
 
 class DotsWindowsDotNetTarget : DotsWindowsTarget
 {
-    protected override string Identifier => "windows-dotnet";
+    public override string Identifier => "windows-dotnet";
 
-    protected override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
+    public override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
 
-    // burst is busted and always tries to build 32-bit here
-    protected override bool CanUseBurst => true;
+    public override bool CanUseBurst => true;
 }
 
 abstract class DotsWindows32Target : DotsBuildSystemTarget
 {
-    protected override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx86.UserDefaultOrDummy);
+    public override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx86.UserDefaultOrDummy);
 }
 
 class DotsWindows32DotNetTarget : DotsWindows32Target
 {
-    protected override string Identifier => "windows32-dotnet";
+    public override string Identifier => "windows32-dotnet";
 
-    protected override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
-    protected override bool CanUseBurst => false;
+    public override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
+    public override bool CanUseBurst => false;
 }
 
 class DotsWindowsIL2CPPTarget : DotsWindowsTarget
 {
-    protected override string Identifier => "windows-il2cpp";
-    protected override bool CanUseBurst => true;
+    public override string Identifier => "windows-il2cpp";
+    public override bool CanUseBurst => true;
 }
