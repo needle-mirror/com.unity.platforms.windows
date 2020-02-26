@@ -17,16 +17,11 @@ namespace Unity.Platforms.Windows
             startInfo.WorkingDirectory = buildTarget.Directory.FullName;
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardOutput = false;
             startInfo.RedirectStandardError = true;
 
             var process = new Process();
             process.StartInfo = startInfo;
-            process.OutputDataReceived += (_, args) =>
-            {
-                if(args.Data != null)
-                    Debug.Log(args.Data);
-            };
             process.ErrorDataReceived += (_, args) =>
             {
                 if(args.Data != null)
@@ -37,7 +32,6 @@ namespace Unity.Platforms.Windows
             if (!success)
                 return false;
 
-            process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
             return true;
