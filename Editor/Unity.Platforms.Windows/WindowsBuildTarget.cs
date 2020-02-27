@@ -70,11 +70,13 @@ namespace Unity.Platforms.Windows
 
         public override string DisplayName => "Windows .NET";
         public override string BeeTargetName => "windows-dotnet";
+        public override bool UsesIL2CPP => false;
     }
 
     class IL2CPPWindowsBuildTarget : WindowsBuildTarget
     {
         public override string DisplayName => "Windows IL2CPP";
         public override string BeeTargetName => "windows-il2cpp";
+        public override bool UsesIL2CPP => true;
     }
 }
