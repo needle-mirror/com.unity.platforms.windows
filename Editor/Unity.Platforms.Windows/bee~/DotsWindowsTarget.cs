@@ -6,24 +6,13 @@ abstract class DotsWindowsTarget : DotsBuildSystemTarget
     public override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx64.UserDefaultOrDummy);
 }
 
-class DotsWindowsDotNetTinyTarget : DotsWindowsTarget
+class DotsWindowsDotNetTarget : DotsWindowsTarget
 {
     public override string Identifier => "windows-dotnet";
 
     public override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
 
     public override bool CanUseBurst => true;
-}
-
-class DotsWindowsDotNetStandard20Target : DotsWindowsTarget
-{
-    public override string Identifier => "windows-dotnet-ns20";
-
-    public override ScriptingBackend ScriptingBackend => ScriptingBackend.Dotnet;
-
-    public override bool CanUseBurst => true;
-
-    public override TargetFramework TargetFramework => TargetFramework.NetStandard20;
 }
 
 abstract class DotsWindows32Target : DotsBuildSystemTarget
