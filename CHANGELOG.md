@@ -7,16 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.2] - 2020-03-14
 
 ### Changed
-- Updated `com.unity.platforms` package version to `0.2.2-preview.3`.
-- Updated `com.unity.platforms.desktop` package version to `0.2.2-preview.3`.
+- Updated `com.unity.platforms` package version to `0.2.2-preview.4`.
+- Updated `com.unity.platforms.desktop` package version to `0.2.2-preview.4`.
+- Renamed 'Windows .NET' build target to 'Windows .NET - Tiny'.
+- Renamed 'Windows IL2CPP' build target to 'Windows IL2CPP - Tiny'.
+
+### Added
+- Added 'Windows .NET - .NET Standard 2.0' build target.
 
 ## [0.2.1] - 2020-02-25
 
 ### Changed
 - Updated `com.unity.platforms` package version to `0.2.1-preview.7`.
 - Updated `com.unity.platforms.desktop` package version to `0.2.1-preview.7`.
-- Removed stdout redirect to Unity Console
-- Add a UsesIL2CPP property to BuildTarget
+- Removed stdout redirect to Unity Console.
+- Add a UsesIL2CPP property to BuildTarget.
 
 ## [0.2.1-preview] - 2020-01-24
 
