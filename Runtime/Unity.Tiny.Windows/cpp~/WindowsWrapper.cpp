@@ -5,11 +5,14 @@
 #include <windef.h>
 #include <winuser.h>
 
+typedef void (*BroadcastFunction)();
+
+static BroadcastFunction s_Broadcast = NULL;
+
 void DialogUpdateCallback()
 {
-// #if ENABLE_PLAYERCONNECTION
-//     PlayerConnection::Get().Poll();
-// #endif
+    if (s_Broadcast != NULL)
+        s_Broadcast();
 }
 
 void CALLBACK DialogTimerCallback(HWND hwnd, UINT uMsg, UINT timerId, DWORD dwTime)
@@ -18,8 +21,9 @@ void CALLBACK DialogTimerCallback(HWND hwnd, UINT uMsg, UINT timerId, DWORD dwTi
 }
 
 DOTS_EXPORT(void)
-ShowDebuggerAttachDialog(const char* message)
+ShowDebuggerAttachDialog(const char* message, BroadcastFunction broadcast)
 {
+    s_Broadcast = broadcast;
     UINT_PTR timerId = 0;
     timerId = SetTimer(NULL, 0, USER_TIMER_MINIMUM, (TIMERPROC)&DialogTimerCallback);
 
