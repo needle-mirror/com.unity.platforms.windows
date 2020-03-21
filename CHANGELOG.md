@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.2.2] - 2020-03-14
 
 ### Changed
-- Updated `com.unity.platforms` package version to `0.2.2-preview.5`.
-- Updated `com.unity.platforms.desktop` package version to `0.2.2-preview.5`.
+- Updated `com.unity.platforms` package dependency.
+- Updated `com.unity.platforms.desktop` package dependency.
 - Renamed 'Windows .NET' build target to 'Windows .NET - Tiny'.
 - Renamed 'Windows IL2CPP' build target to 'Windows IL2CPP - Tiny'.
 
