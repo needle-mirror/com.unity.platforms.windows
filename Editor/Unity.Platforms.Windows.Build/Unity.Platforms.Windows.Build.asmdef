@@ -3,6 +3,7 @@
     "references": [
         "Unity.Build",
         "Unity.Build.Classic",
+        "Unity.Build.Classic.Private",
         "Unity.Build.Common",
         "Unity.Build.Editor",
         "Unity.Properties"
@@ -10,6 +11,11 @@
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
+    ],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "bee.dll",
+        "Bee.Toolchain.Windows.dll"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false
