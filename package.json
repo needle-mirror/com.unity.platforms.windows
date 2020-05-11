@@ -1,7 +1,7 @@
 {
   "name": "com.unity.platforms.windows",
   "displayName": "Platforms Windows",
-  "version": "0.4.0-preview.1",
+  "version": "0.4.0-preview.2",
   "unity": "2019.3",
   "unityRelease": "0f1",
   "description": "Provides platform and build specific features for the Windows platform.",
@@ -12,15 +12,15 @@
     "windows"
   ],
   "dependencies": {
-    "com.unity.platforms": "0.4.0-preview.1",
-    "com.unity.platforms.desktop": "0.4.0-preview.1"
+    "com.unity.platforms": "0.4.0-preview.2",
+    "com.unity.platforms.desktop": "0.4.0-preview.2"
   },
   "upmCi": {
-    "footprint": "73e87a41a7d64efb3b5e7d746bda844e1da0c838"
+    "footprint": "61d2d0a1460538a91021f440c1ee4a6bd3d71052"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Unity-Technologies/dots-platforms.git",
-    "revision": "f18d1f4e988bd455bfe67ccb55201959bd1532a1"
+    "revision": "dc6d1ac9f60c2426e90c984b11c971e445e20846"
   }
 }

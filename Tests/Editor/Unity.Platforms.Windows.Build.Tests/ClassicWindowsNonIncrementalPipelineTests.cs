@@ -6,7 +6,7 @@ namespace Unity.Platforms.Windows.Build.Tests
 {
     class ClassicWindowsNonIncrementalPipelineTests
     {
-#if UNITY_EDITOR_WIN
+#if UNITY_STANDALONE_WIN
         const string k_PackagePath = "Packages/com.unity.platforms.windows/";
         const string k_TestPath = "Tests/Editor/Unity.Platforms.Windows.Build.Tests/";
         const string k_BuildConfigurationPath = k_PackagePath + k_TestPath + "WindowsClassicBuildConfiguration.buildconfiguration";
