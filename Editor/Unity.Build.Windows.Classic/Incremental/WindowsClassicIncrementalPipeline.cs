@@ -1,14 +1,14 @@
 #if ENABLE_EXPERIMENTAL_INCREMENTAL_PIPELINE
-using Bee.NativeProgramSupport.Building;
 using Bee.Toolchain.VisualStudio;
 using NiceIO;
 using System;
 using System.Linq;
+using Bee.Core;
+using Bee.NativeProgramSupport;
 using Unity.Build;
 using Unity.Build.Classic.Private;
 using Unity.Build.Classic.Private.IncrementalClassicPipeline;
 using Unity.Build.Common;
-using Unity.BuildSystem.NativeProgramSupport;
 using UnityEditor;
 
 namespace Unity.Build.Windows.Classic
@@ -52,6 +52,7 @@ namespace Unity.Build.Windows.Classic
                 new ClassicBuildArchitectureData()
                 {
                     DynamicLibraryDeployDirectory = classicContext.DataDeployDirectory.Combine("Plugins"),
+                    IL2CPPLibraryDirectory = context.GetOutputBuildDirectory(),
                     BurstTarget = "x64_SSE4",
                     ToolChain = hostToolChain,
                     NativeProgramFormat = hostToolChain.DynamicLibraryFormat.WithLinkerSetting<MsvcDynamicLinker>(s => s.WithNoDefaultLibs("uuid.lib"))
