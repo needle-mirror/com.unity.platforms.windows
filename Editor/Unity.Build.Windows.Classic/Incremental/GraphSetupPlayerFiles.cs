@@ -18,7 +18,9 @@ namespace Unity.Build.Windows.Classic
             var classicContext = context.GetValue<IncrementalClassicSharedData>();
             var playerDirectory = classicContext.VariationDirectory;
 
-            var appName = context.GetComponentOrDefault<GeneralSettings>().ProductName;
+            var generalSettings = context.GetComponentOrDefault<GeneralSettings>();
+            var appName = generalSettings.ProductName;
+            var appData = new NPath(appName + "_Data");
 
             NPath outputBuildDirectory = new NPath(context.GetOutputBuildDirectory()).MakeAbsolute();
             foreach (var file in playerDirectory.Files(true))
@@ -39,10 +41,18 @@ namespace Unity.Build.Windows.Classic
                 }
 
                 if (targetRelativePath.ToString().StartsWith("Data/"))
-                    targetRelativePath = appName + "_Data/" + targetRelativePath.RelativeTo("Data");
+                    targetRelativePath = appData.Combine(targetRelativePath.RelativeTo("Data"));
 
                 CopyTool.Instance().Setup(outputBuildDirectory.Combine(targetRelativePath), file.MakeAbsolute());
             }
+
+            var appInfo = outputBuildDirectory.Combine(appData, "app.info");
+            Backend.Current.AddWriteTextAction(appInfo,
+                string.Join("\n", new[]
+                {
+                    generalSettings.CompanyName,
+                    generalSettings.ProductName
+                }));
             return context.Success();
         }
     }

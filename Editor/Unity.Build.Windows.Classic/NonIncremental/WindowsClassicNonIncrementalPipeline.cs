@@ -1,7 +1,7 @@
+using Bee.Core;
 using System.IO;
 using Unity.Build.Classic.Private;
 using Unity.Build.Common;
-using Unity.BuildSystem.NativeProgramSupport;
 using UnityEditor;
 
 namespace Unity.Build.Windows.Classic
