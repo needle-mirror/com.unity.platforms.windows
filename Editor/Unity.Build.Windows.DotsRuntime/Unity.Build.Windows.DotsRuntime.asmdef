@@ -1,6 +1,8 @@
 {
     "name": "Unity.Build.Windows.DotsRuntime",
     "references": [
+        "Unity.Build",
+        "Unity.Build.Internals",
         "Unity.Build.DotsRuntime"
     ],
     "includePlatforms": [

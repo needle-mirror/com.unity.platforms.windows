@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.IO;
+using Unity.Build;
+using Unity.Build.Internals;
 using Unity.Build.DotsRuntime;
 using Debug = UnityEngine.Debug;
 
@@ -38,13 +40,13 @@ namespace Unity.Build.Windows.DotsRuntime
             return true;
         }
 
-        public override ShellProcessOutput RunTestMode(string exeName, string workingDirPath, int timeout)
+        internal override ShellProcessOutput RunTestMode(string exeName, string workingDirPath, int timeout)
         {
             var args = new string[] { };
             var workingDir = new DirectoryInfo(workingDirPath);
             var executable = $"{workingDirPath}/{exeName}.exe";
 
-            var shellArgs = new ShellProcessArgs
+            var shellArgs = new ShellProcessArguments
             {
                 Executable = executable,
                 Arguments = args,
@@ -59,7 +61,7 @@ namespace Unity.Build.Windows.DotsRuntime
                 shellArgs.MaxIdleKillIsAnError = false;
             }
 
-            return Shell.Run(shellArgs);
+            return ShellProcess.Run(shellArgs);
         }
     }
 
