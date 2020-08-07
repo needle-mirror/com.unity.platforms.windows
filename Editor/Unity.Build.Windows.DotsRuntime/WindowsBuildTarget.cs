@@ -1,8 +1,10 @@
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using Unity.Build;
 using Unity.Build.Internals;
 using Unity.Build.DotsRuntime;
+using Unity.Build.Desktop.DotsRuntime;
 using Debug = UnityEngine.Debug;
 
 namespace Unity.Build.Windows.DotsRuntime
@@ -12,56 +14,25 @@ namespace Unity.Build.Windows.DotsRuntime
         public override bool CanBuild => UnityEngine.Application.platform == UnityEngine.RuntimePlatform.WindowsEditor;
         public override string ExecutableExtension => ".exe";
         public override string UnityPlatformName => nameof(UnityEditor.BuildTarget.StandaloneWindows64);
-
+        
         public override bool Run(FileInfo buildTarget)
         {
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = buildTarget.FullName;
             startInfo.WorkingDirectory = buildTarget.Directory.FullName;
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = false;
-            startInfo.RedirectStandardError = true;
-
-            var process = new Process();
-            process.StartInfo = startInfo;
-            process.ErrorDataReceived += (_, args) =>
-            {
-                if (args.Data != null)
-                    Debug.LogError(args.Data);
-            };
-
-            var success = process.Start();
-            if (!success)
-                return false;
-
-            process.BeginErrorReadLine();
-
-            return true;
+            
+            return new DesktopRun().RunOnThread(startInfo);
         }
 
         internal override ShellProcessOutput RunTestMode(string exeName, string workingDirPath, int timeout)
         {
-            var args = new string[] { };
-            var workingDir = new DirectoryInfo(workingDirPath);
-            var executable = $"{workingDirPath}/{exeName}.exe";
-
             var shellArgs = new ShellProcessArguments
             {
-                Executable = executable,
-                Arguments = args,
-                WorkingDirectory = workingDir,
-                ThrowOnError = false
+                Executable = $"{workingDirPath}/{exeName}.exe",
+                Arguments = new string[] { },
             };
 
-            // samples should be killed on timeout
-            if (timeout > 0)
-            {
-                shellArgs.MaxIdleTimeInMilliseconds = timeout;
-                shellArgs.MaxIdleKillIsAnError = false;
-            }
-
-            return ShellProcess.Run(shellArgs);
+            return DesktopRun.RunTestMode(shellArgs, workingDirPath, timeout);
         }
     }
 
