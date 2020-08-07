@@ -1,6 +1,7 @@
 using Bee.Toolchain.Xcode;
 using JetBrains.Annotations;
-using Unity.BuildSystem.NativeProgramSupport;
+using Bee.Core;
+using Bee.NativeProgramSupport;
 
 [UsedImplicitly]
 class CustomizerForTinyWindows: AsmDefCSharpProgramCustomizer

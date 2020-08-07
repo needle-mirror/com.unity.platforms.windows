@@ -1,6 +1,8 @@
 using Bee.Toolchain.Windows;
 using DotsBuildTargets;
-using Unity.BuildSystem.NativeProgramSupport;
+using Bee.NativeProgramSupport;
+
+
 abstract class DotsWindowsTarget : DotsBuildSystemTarget
 {
     public override ToolChain ToolChain => new WindowsToolchain(WindowsSdk.Locatorx64.UserDefaultOrDummy);
