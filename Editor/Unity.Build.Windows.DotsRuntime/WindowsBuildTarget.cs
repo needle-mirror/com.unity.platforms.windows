@@ -1,26 +1,27 @@
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
-using Unity.Build;
-using Unity.Build.Internals;
-using Unity.Build.DotsRuntime;
 using Unity.Build.Desktop.DotsRuntime;
-using Debug = UnityEngine.Debug;
+using Unity.Build.DotsRuntime;
+using Unity.Build.Internals;
+using UnityEngine;
 
 namespace Unity.Build.Windows.DotsRuntime
 {
     public abstract class WindowsBuildTarget : BuildTarget
     {
+        protected static Texture2D s_Icon = LoadIcon("Icons", "BuildSettings.Standalone");
+
         public override bool CanBuild => UnityEngine.Application.platform == UnityEngine.RuntimePlatform.WindowsEditor;
         public override string ExecutableExtension => ".exe";
         public override string UnityPlatformName => nameof(UnityEditor.BuildTarget.StandaloneWindows64);
-        
+        public override Texture2D Icon => s_Icon;
+
         public override bool Run(FileInfo buildTarget)
         {
             var startInfo = new ProcessStartInfo();
             startInfo.FileName = buildTarget.FullName;
             startInfo.WorkingDirectory = buildTarget.Directory.FullName;
-            
+
             return new DesktopRun().RunOnThread(startInfo);
         }
 
