@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 using Unity.Build.Desktop.DotsRuntime;
@@ -46,6 +47,9 @@ namespace Unity.Build.Windows.DotsRuntime
         public override string DisplayName => "Windows .NET - Tiny";
         public override string BeeTargetName => "windows-dotnet";
         public override bool UsesIL2CPP => false;
+        public override Type[] DefaultComponents { get; }
+        public override string DefaultAssetFileName => "Win-DotNet";
+        public override bool ShouldCreateBuildTargetByDefault => true;
     }
 
     class DotNetStandard20WindowsBuildTarget : WindowsBuildTarget

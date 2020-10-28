@@ -14,7 +14,7 @@ namespace Unity.Build.Windows.Classic
                 return context.Failure($"Could not retrieve {nameof(BuildReport)} from build context.");
             }
 
-            var artifact = context.GetOrCreateValue<WindowsArtifact>();
+            var artifact = context.GetOrCreateBuildArtifact<WindowsArtifact>();
             artifact.OutputTargetFile = new FileInfo(report.summary.outputPath);
             return context.Success();
         }

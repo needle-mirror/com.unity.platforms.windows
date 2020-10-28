@@ -4,7 +4,7 @@ namespace Unity.Build.Windows.Classic
 {
     sealed class WindowsRunInstance : IRunInstance
     {
-        Process m_Process;
+        readonly Process m_Process;
 
         public bool IsRunning => !m_Process.HasExited;
 
@@ -20,7 +20,7 @@ namespace Unity.Build.Windows.Classic
 
         public static RunResult Create(RunContext context)
         {
-            var artifact = context.GetLastBuildArtifact<WindowsArtifact>();
+            var artifact = context.GetBuildArtifact<WindowsArtifact>();
             var process = new Process();
             process.StartInfo.FileName = artifact.OutputTargetFile.FullName;
             process.StartInfo.WorkingDirectory = artifact.OutputTargetFile.Directory?.FullName ?? string.Empty;

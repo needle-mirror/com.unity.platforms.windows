@@ -1,6 +1,4 @@
-﻿using Bee.Core;
-using System.IO;
-using Unity.Build.Classic;
+﻿using Unity.Build.Classic;
 using Unity.Build.Common;
 using Unity.Build.Editor;
 using UnityEditor;
@@ -11,23 +9,25 @@ namespace Unity.Build.Windows.Classic
     {
         const string k_CreateBuildConfigurationAssetClassic = BuildConfigurationMenuItem.k_BuildConfigurationMenu + "Windows Classic Build Configuration";
 
-        [MenuItem(k_CreateBuildConfigurationAssetClassic, true)]
-        static bool CreateBuildConfigurationAssetClassicValidation()
-        {
-            return Directory.Exists(AssetDatabase.GetAssetPath(Selection.activeObject));
-        }
-
         [MenuItem(k_CreateBuildConfigurationAssetClassic)]
         static void CreateBuildConfigurationAssetClassic()
         {
-            Selection.activeObject = BuildConfigurationMenuItem.CreateAssetInActiveDirectory(
-                "WindowsClassic",
+            var newAsset = BuildConfigurationMenuItem.CreateAssetInActiveDirectory("WindowsClassic", GetDefaultComponents());
+            if (newAsset != null && newAsset)
+                ProjectWindowUtil.ShowCreatedAsset(newAsset);
+        }
+
+        static IBuildComponent[] GetDefaultComponents()
+        {
+            return new IBuildComponent[]
+            {
                 new GeneralSettings(),
                 new SceneList(),
                 new ClassicBuildProfile
                 {
-                    Platform = new WindowsPlatform()
-                });
+                    Platform = Platform.Windows
+                }
+            };
         }
     }
 }

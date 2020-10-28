@@ -1,15 +1,12 @@
-using Bee.Core;
 using System.IO;
 using Unity.Build.Classic.Private;
 using Unity.Build.Common;
-using UnityEditor;
 
 namespace Unity.Build.Windows.Classic
 {
     sealed class WindowsClassicNonIncrementalPipeline : ClassicNonIncrementalPipelineBase
     {
-        protected override BuildTarget BuildTarget => BuildTarget.StandaloneWindows64;
-        public override Platform Platform => new WindowsPlatform();
+        public override Platform Platform => Platform.Windows;
 
         public override BuildStepCollection BuildSteps { get; } = new[]
         {
@@ -23,7 +20,7 @@ namespace Unity.Build.Windows.Classic
 
         protected override BoolResult OnCanRun(RunContext context)
         {
-            var artifact = context.GetLastBuildArtifact<WindowsArtifact>();
+            var artifact = context.GetBuildArtifact<WindowsArtifact>();
             if (artifact == null)
             {
                 return BoolResult.False($"Could not retrieve build artifact '{nameof(WindowsArtifact)}'.");

@@ -1,11 +1,8 @@
 {
-    "name": "Unity.Build.Windows.Classic.Tests",
+    "name": "Unity.Build.Windows.Tests",
     "references": [
         "Unity.Build",
-		"Unity.Build.Classic",
-		"Unity.Build.Classic.Private",
-		"Unity.Build.Windows",
-		"Unity.Build.Windows.Classic"
+		"Unity.Build.Windows"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
